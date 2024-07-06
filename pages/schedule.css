@@ -48,30 +48,16 @@ body {
 }
 
 .uploaded-timetable {
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin-top: 20px;
+  margin: 20px;
 }
 
-.uploaded-timetable h2 {
-  margin-bottom: 10px;
-}
-
-.timetable-list {
+.timetable-list a {
+  display: block;
   margin-top: 10px;
+  text-decoration: none;
+  color: #3498db;
 }
 
-.timetable-list img {
-  width: 50%;
-  border-radius: 4px;
+.timetable-list a:hover {
+  text-decoration: underline;
 }
-
-.timetable-list .timetable-item {
-  padding: 8px;
-  background-color: #f0f0f0;
-  margin-bottom: 8px;
-  border-radius: 4px;
-}
-  
