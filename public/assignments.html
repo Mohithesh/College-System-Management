@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="assignments.css">
     <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,15 +18,15 @@
     <!-- Left Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <img src="../photos/img1.png" alt="Logo">
+            <img src="../assets/images/img1.png" alt="Logo">
             <span class="logo-text">Malnad College <br>of Engineering</span>
         </div>
       <nav class="sidebar-nav">
         <ul>
-            <li class="active"><a href="#"><i class="bi bi-house-fill" style="color: black;"></i> Home</a></li>
+            <li><a href="home.html"><i class="bi bi-house-fill"></i> Home</a></li>
             <li><a href="schedule.html"><i class="bi bi-calendar3"></i> Schedule</a></li>
             <li><a href="materials.html"><i class="bi bi-envelope-paper-fill"></i> Materials</a></li>
-            <li><a href="assignments.html"><i class="bi bi-clipboard-check-fill"></i> Assignments</a></li>
+            <li class="active"><a href="assignments.html"><i class="bi bi-clipboard-check-fill" style="color: black;"></i> Assignments</a></li>
             <li><a href="exams.html"><i class="bi bi-pen-fill"></i> Conduct Exams</a></li>
             <li><a href="faq.html"><i class="bi bi-question-lg"></i> FAQs</a></li>
         </ul>
@@ -36,7 +37,7 @@
     <main class="main-content">
       <header class="main-header">
         <div class="page-title">
-          <h1>Home</h1>
+          <h1>Give Assignments</h1>
         </div>
         <div class="header-actions">
           <div class="date-time">
@@ -46,41 +47,33 @@
             <a class="active" href="#" id="modeSwitchBtn"><i class="bi bi-gear-fill"></i></a>
             <a class="active" href="#" id="modeSwitchBtn"><i class="bi bi-person-fill"></i></a> 
           </div>
-          
-          
         </div>
       </header>
 <hr>
-      <!-- Teacher Profile -->
-      <section class="teacher-profile">
-        <h2>Teacher Profile</h2>
-        <div class="profile-details">
-          <div class="profile-info">
-            <div class="profile-photo">
-              <img src="../photos/image4.jpg" alt="Teacher Photo">
-            </div>
-            <div class="profile-text">
-              <p><strong>Name:</strong>Nithyashree R</p>
-              <p><strong>ID:</strong> CS123</p>
-              <p><strong>Department:</strong> Computer Science and Engineering</p>
-            </div>
-          </div>
+
+       <!-- New Section: Upload Box -->
+       <section class="upload-box">
+        <h2>Upload Box</h2>
+        <div class="upload-form">
+          <input type="text" id="file-name" placeholder="Enter file name">
+          <label for="file-upload" class="custom-file-upload">
+            <i class="bi bi-cloud-upload"></i> Upload
+          </label>
+          <input type="file" id="file-upload" onchange="handleFileUpload(event)">
         </div>
       </section>
 
-      <!-- Leave Application Section -->
-      <section class="leave-application">
-        <h2>Apply for Leave</h2>
-        <div class="leave-form-row">
-          <label for="leave-date">Select Date:</label>
-          <input type="date" id="leave-date">
-          <button id="apply-leave-btn">Apply Leave</button>
-        </div>
-        <div class="leave-output">
-          <ul id="leave-output-list"></ul>
+      <!-- New Section: Check Assignment Received -->
+      <section class="check-assignments">
+        <h2>Check Assignments Received</h2>
+        <div class="assignment-summary">
+          <p>Total assignments received: <span id="total-assignments">0</span></p>
+          <button class="view-button" onclick="viewAssignments()"><i class="bi bi-eye"></i> View</button>
         </div>
       </section>
       
+    </main>
+  </div>
 
   <script>
     // Update date and time dynamically
@@ -91,26 +84,28 @@
     }
     
     updateTime(); 
-    setInterval(updateTime, 1000); 
-
-    // Apply Leave functionality
-    document.getElementById('apply-leave-btn').addEventListener('click', function() {
-      const date = document.getElementById('leave-date').value;
-
-      if (date) {
-        const leaveOutputList = document.getElementById('leave-output-list');
-        const leaveEntry = document.createElement('li');
-        leaveEntry.textContent = `Leave applied for ${date}.`;
-        leaveOutputList.prepend(leaveEntry);
-      } else {
-        const leaveOutputList = document.getElementById('leave-output-list');
-        const leaveEntry = document.createElement('li');
-        leaveEntry.textContent = 'Please select a date.';
-        leaveOutputList.prepend(leaveEntry);
-      }
-    });
-
+    setInterval(updateTime, 1000);
   </script>
   
+  <script>
+    // Function to handle file upload
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        // Assuming you save the file and increment count here
+        let totalAssignments = parseInt(localStorage.getItem('totalAssignments')) || 0;
+        totalAssignments++;
+        localStorage.setItem('totalAssignments', totalAssignments);
+        document.getElementById('total-assignments').textContent = totalAssignments;
+      }
+    }
+
+    // Function to view assignments (dummy function for demonstration)
+    function viewAssignments() {
+      alert('Viewing assignments');
+      // Implement your logic to view assignments here
+    }
+  </script>
+
 </body>
 </html>

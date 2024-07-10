@@ -18,7 +18,7 @@
     <!-- Left Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <img src="../photos/img1.png" alt="Logo">
+            <img src="../assets/images/img1.png" alt="Logo">
             <span class="logo-text">Malnad College <br>of Engineering</span>
         </div>
       <nav class="sidebar-nav">
@@ -53,7 +53,7 @@
   <!-- Upload Section -->
   <div class="upload-section">
     <h2>Upload Material</h2>
-    <form id="uploadForm">
+    <form id="materialsForm" action="/materials" method="POST" enctype="multipart/form-data">
       <div class="form-row">
         <div class="form-group">
           <label for="classSelect">Select Class:</label>
@@ -89,7 +89,7 @@
 
       <!-- File Upload Input -->
       <label for="fileUpload">Choose PDF file:</label>
-      <input type="file" id="fileUpload" name="fileUpload">
+      <input type="file" id="fileInput" name="file" accept="application/pdf" required>
 
       <!-- Submit Button -->
       <button type="submit">Upload</button>
@@ -108,14 +108,7 @@
   <!-- Display Uploaded Materials -->
   <div class="uploaded-materials">
     <h2>Uploaded Materials</h2>
-    <div id="materialsList">
-      <!-- Default PDF materials (for demonstration) -->
-      <div class="material-item">
-        <a href="../Lorem_ipsum.pdf" target="_blank">Sem 4 - Section A (2023): SampleMaterial1.pdf</a>
-      </div>
-      <div class="material-item">
-        <a href="../Lorem_ipsum.pdf" target="_blank">Sem 3 - Section B (2023): SampleMaterial2.pdf</a>
-      </div>
+    <div id="uploadedFiles"></div>
     </div>
   </div>
 
@@ -129,15 +122,52 @@
   </div>
 
   <script>
-    // Update date and time dynamically
-    function updateTime() {
-      const now = new Date();
-      const dateTime = now.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
-      document.getElementById('date-time').textContent = dateTime;
-    }
-    
-    updateTime(); 
-    setInterval(updateTime, 1000);
+  
+        async function fetchUploadedFiles(query = '') {
+            const response = await fetch(`/files?query=${encodeURIComponent(query)}`);
+            const files = await response.json();
+            const uploadedFilesDiv = document.getElementById('uploadedFiles');
+
+            // Clear previous uploads
+            uploadedFilesDiv.innerHTML = '';
+
+           files.forEach(file => {
+                const div = document.createElement('div');
+                div.innerHTML = `<strong>${file.metadata}</strong> - ${file.filename} <button onclick="deleteFile('${file.filename}')">Delete</button>`;
+                uploadedFilesDiv.appendChild(div);
+            });
+        }
+
+        document.getElementById('materialsForm').onsubmit = async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            await fetch('/materials', {
+                method: 'POST',
+                body: formData
+            });
+            
+           // Fetch and display updated list of uploaded files
+            await fetchUploadedFiles();
+        };
+
+        document.getElementById('searchInput').oninput = async function() {
+            const query = this.value;
+            await fetchUploadedFiles(query);
+        };
+
+        async function deleteFile(filename) {
+            await fetch(`/file/${filename}`, {
+                method: 'DELETE'
+            });
+            
+            // Fetch and display updated list of uploaded files
+            await fetchUploadedFiles();
+        }
+
+        // Fetch and display uploaded files on page load
+        window.onload = fetchUploadedFiles;
+  
   </script>
   
 </body>

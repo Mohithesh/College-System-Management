@@ -61,3 +61,16 @@ body {
 .timetable-list a:hover {
   text-decoration: underline;
 }
+
+#fileInput {
+    margin-bottom: 15px;
+}
+
+#uploadedFiles {
+    margin-top: 20px;
+}
+
+iframe {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}

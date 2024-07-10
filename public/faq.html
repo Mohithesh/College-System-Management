@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../pages/home.css">
-    <link rel="stylesheet" href="../pages/schedule.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="faq.css">
     <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,17 +18,17 @@
     <!-- Left Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <img src="../photos/img1.png" alt="Logo">
+            <img src="../assets/images/img1.png" alt="Logo">
             <span class="logo-text">Malnad College <br>of Engineering</span>
         </div>
       <nav class="sidebar-nav">
         <ul>
             <li><a href="home.html"><i class="bi bi-house-fill"></i> Home</a></li>
-            <li class="active"><a href="schedule.html"><i class="bi bi-calendar3" style="color: black;"></i> Schedule</a></li>
+            <li><a href="schedule.html"><i class="bi bi-calendar3"></i> Schedule</a></li>
             <li><a href="materials.html"><i class="bi bi-envelope-paper-fill"></i> Materials</a></li>
             <li><a href="assignments.html"><i class="bi bi-clipboard-check-fill"></i> Assignments</a></li>
             <li><a href="exams.html"><i class="bi bi-pen-fill"></i> Conduct Exams</a></li>
-            <li><a href="faq.html"><i class="bi bi-question-lg"></i> FAQs</a></li>
+            <li class="active"><a href="faq.html"><i class="bi bi-question-lg" style="color: black;"></i> FAQs</a></li>
         </ul>
       </nav>
     </aside>
@@ -37,7 +37,7 @@
     <main class="main-content">
       <header class="main-header">
         <div class="page-title">
-          <h1>Schedule</h1>
+          <h1>FAQs</h1>
         </div>
         <div class="header-actions">
           <div class="date-time">
@@ -50,41 +50,30 @@
         </div>
       </header>
 <hr>
-      <!-- Upload Section -->
-      <section class="upload-section">
-        <h2>Upload Timetable</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-          <label for="timetable">Choose a file:</label>
-          <input type="file" id="timetable" name="timetable" accept=".jpg,.jpeg,.png">
-          <button type="submit">Upload</button>
-        </form>        
-      </section>
       
-      <!-- Display Uploaded Timetable -->
-      <section class="uploaded-timetable">
-        <h2>Timetable</h2>
-        <div class="timetable-content" id="timetable-content">
-          <!-- PDF content will be displayed here -->
+      <!-- FAQs Section -->
+      <section class="faqs">
+        <div class="faq-item">
+          <h3 class="question">What is the Course and Faculty Management System?</h3>
+          <p class="answer">The Course and Faculty Management System is a platform designed to streamline the management of academic courses and faculty information, facilitating easier scheduling, record-keeping, and communication.</p>
         </div>
+        <div class="faq-item">
+          <h3 class="question">Can I upload course materials?</h3>
+          <p class="answer">Yes, faculty members can upload course materials such as lecture notes, assignments, and readings through the course management interface.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="question">Is my data secure?</h3>
+          <p class="answer">Yes, the system employs robust security measures, including encryption and regular backups, to ensure that user data is secure.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="question">Who do I contact for technical support?</h3>
+          <p class="answer">For technical support, users can contact the IT support team through the 'Help' section of the system or via email/phone provided on the support page.</p>
+        </div>
+        <!-- Add more FAQ items as needed -->
       </section>
-
 
     </main>
   </div>
-
-  <script>
-    // Fetch and display the list of uploaded files
-    fetch('/uploads')
-        .then(response => response.json())
-        .then(files => {
-            const fileList = document.getElementById('uploaded-files');
-            files.forEach(file => {
-                const listItem = document.createElement('li');
-                listItem.textContent = file;
-                fileList.appendChild(listItem);
-            });
-        });
-  </script>
 
   <script>
     // Update date and time dynamically
@@ -94,7 +83,7 @@
       document.getElementById('date-time').textContent = dateTime;
     }
     
-    updateTime();
+    updateTime(); 
     setInterval(updateTime, 1000); 
   </script>
   
