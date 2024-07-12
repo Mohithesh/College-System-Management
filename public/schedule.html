@@ -44,11 +44,15 @@
             <p id="date-time">Loading...</p> <!-- JavaScript will update this -->
           </div>
           <div class="icons">
-            <a class="active" href="#" id="modeSwitchBtn"><i class="bi bi-gear-fill"></i></a>
-            <a class="active" href="#" id="modeSwitchBtn"><i class="bi bi-person-fill"></i></a> 
+              <a href="#" id="gearIcon"><i class="bi bi-gear-fill"></i></a>
+            <div class="dropdown">
+              <a href="#" id="personIcon"><i class="bi bi-person-fill"></i></a>
+                <div class="dropdown-content">
+                  <a href="index.html" id="logoutBtn">Logout</a>
+                </div>
+            </div>
           </div>
-        </div>
-      </header>
+      </header> 
 <hr>
       <!-- Upload Section -->
       <section class="upload-section">
@@ -76,6 +80,16 @@
   </div>
 
   <script>
+
+   // Update date and time dynamically
+    function updateTime() {
+      const now = new Date();
+      const dateTime = now.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+      document.getElementById('date-time').textContent = dateTime;
+    }
+    
+    updateTime(); 
+    setInterval(updateTime, 1000); 
 
         async function fetchUploadedFile() {
             const response = await fetch('/single-file');

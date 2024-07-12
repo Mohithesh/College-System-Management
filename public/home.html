@@ -43,13 +43,15 @@
             <p id="date-time">Loading...</p> <!-- JavaScript will update this -->
           </div>
           <div class="icons">
-            <a class="active" href="#" id="modeSwitchBtn"><i class="bi bi-gear-fill"></i></a>
-            <a class="active" href="#" id="modeSwitchBtn"><i class="bi bi-person-fill"></i></a> 
+              <a href="#" id="gearIcon"><i class="bi bi-gear-fill"></i></a>
+            <div class="dropdown">
+              <a href="#" id="personIcon"><i class="bi bi-person-fill"></i></a>
+                <div class="dropdown-content">
+                  <a href="#" id="logoutBtn">Logout</a>
+                </div>
+            </div>
           </div>
-          
-          
-        </div>
-      </header>
+      </header> 
 <hr>
       <!-- Teacher Profile -->
       <section class="teacher-profile">
@@ -109,7 +111,6 @@
         leaveOutputList.prepend(leaveEntry);
       }
     });
-
   </script>
   
 </body>
