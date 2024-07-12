@@ -35,20 +35,24 @@
 
     <!-- Main Content Area -->
     <main class="main-content">
-      <header class="main-header">
-        <div class="page-title">
-          <h1>Upload Study Materials</h1>
-        </div>
-        <div class="header-actions">
-          <div class="date-time">
-            <p id="date-time">Loading...</p> <!-- JavaScript will update this -->
+        <header class="main-header">
+          <div class="page-title">
+            <h1>Materials</h1>
           </div>
-          <div class="icons">
-            <a class="active" href="#" id="modeSwitchBtn"><i class="bi bi-gear-fill"></i></a>
-            <a class="active" href="#" id="modeSwitchBtn"><i class="bi bi-person-fill"></i></a> 
-          </div>
-        </div>
-      </header>
+          <div class="header-actions">
+            <div class="date-time">
+              <p id="date-time">Loading...</p> <!-- JavaScript will update this -->
+            </div>
+            <div class="icons">
+                <a href="#" id="gearIcon"><i class="bi bi-gear-fill"></i></a>
+              <div class="dropdown">
+                <a href="#" id="personIcon"><i class="bi bi-person-fill"></i></a>
+                  <div class="dropdown-content">
+                    <a href="index.html" id="logoutBtn">Logout</a>
+                  </div>
+              </div>
+            </div>
+        </header>
 <hr>
   <!-- Upload Section -->
   <div class="upload-section">
@@ -57,7 +61,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="classSelect">Select Class:</label>
-          <select id="classSelect" name="class">
+          <select id="classSelect" name="class" required>
             <option value="sem3">Sem 3</option>
             <option value="sem4">Sem 4</option>
             <option value="sem5">Sem 5</option>
@@ -69,7 +73,7 @@
 
         <div class="form-group">
           <label for="sectionSelect">Select Section:</label>
-          <select id="sectionSelect" name="section">
+          <select id="sectionSelect" name="section" required>
             <option value="sectionA">Section A</option>
             <option value="sectionB">Section B</option>
             <option value="sectionC">Section C</option>
@@ -78,7 +82,7 @@
 
         <div class="form-group">
           <label for="yearSelect">Select Year:</label>
-          <select id="yearSelect" name="year">
+          <select id="yearSelect" name="year" required>
             <option value="2021">2021</option>
             <option value="2022">2022</option>
             <option value="2023">2023</option>
@@ -122,6 +126,16 @@
   </div>
 
   <script>
+
+    // Update date and time dynamically
+    function updateTime() {
+      const now = new Date();
+      const dateTime = now.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+      document.getElementById('date-time').textContent = dateTime;
+    }
+    
+    updateTime(); 
+    setInterval(updateTime, 1000); 
   
         async function fetchUploadedFiles(query = '') {
             const response = await fetch(`/files?query=${encodeURIComponent(query)}`);
@@ -133,7 +147,7 @@
 
            files.forEach(file => {
                 const div = document.createElement('div');
-                div.innerHTML = `<strong>${file.metadata}</strong> - ${file.filename} <button onclick="deleteFile('${file.filename}')">Delete</button>`;
+                div.innerHTML = `${file.filename} <button onclick="deleteFile('${file.filename}')">Delete</button>`;
                 uploadedFilesDiv.appendChild(div);
             });
         }

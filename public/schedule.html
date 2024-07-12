@@ -34,25 +34,25 @@
     </aside>
 
     <!-- Main Content Area -->
-    <main class="main-content">
-      <header class="main-header">
-        <div class="page-title">
-          <h1>Schedule</h1>
-        </div>
-        <div class="header-actions">
-          <div class="date-time">
-            <p id="date-time">Loading...</p> <!-- JavaScript will update this -->
+      <main class="main-content">
+        <header class="main-header">
+          <div class="page-title">
+            <h1>Schedule</h1>
           </div>
-          <div class="icons">
-              <a href="#" id="gearIcon"><i class="bi bi-gear-fill"></i></a>
-            <div class="dropdown">
-              <a href="#" id="personIcon"><i class="bi bi-person-fill"></i></a>
-                <div class="dropdown-content">
-                  <a href="index.html" id="logoutBtn">Logout</a>
-                </div>
+          <div class="header-actions">
+            <div class="date-time">
+              <p id="date-time">Loading...</p> <!-- JavaScript will update this -->
             </div>
-          </div>
-      </header> 
+            <div class="icons">
+                <a href="#" id="gearIcon"><i class="bi bi-gear-fill"></i></a>
+              <div class="dropdown">
+                <a href="#" id="personIcon"><i class="bi bi-person-fill"></i></a>
+                  <div class="dropdown-content">
+                    <a href="index.html" id="logoutBtn">Logout</a>
+                  </div>
+              </div>
+            </div>
+        </header>
 <hr>
       <!-- Upload Section -->
       <section class="upload-section">
@@ -81,7 +81,7 @@
 
   <script>
 
-   // Update date and time dynamically
+    // Update date and time dynamically
     function updateTime() {
       const now = new Date();
       const dateTime = now.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
